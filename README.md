@@ -2,12 +2,15 @@
 A simple model for jet quenching in Heavy-Ion Collisions
 
 ## Description and Usage
-The ezQuench package consists of a set of python routines that fit a simple model for jet energy-loss (jet-quenching) in heavy-ion collisions measured by experiments at the Relativistic Heavy-Ion Collider (RHIC) and the Large Hadron Collider (LHC).  The routines currently perform a set of Bayesian calibrations to jet nuclear modification factors measured by the ATLAS collaboration for Pb-Pb collisions at the nucleon-nucleon center of mass energy of 5.02 TeV.  This software package serves as the companion code to [list arXiv reference] and can be used to generate all results and figures found therein.
+The ezQuench package consists of a set of python routines that fit a simple model for jet energy-loss (jet-quenching) in heavy-ion collisions measured by experiments at the Relativistic Heavy-Ion Collider (RHIC) and the Large Hadron Collider (LHC).  The routines currently perform a set of Bayesian calibrations to jet nuclear modification factors measured by the ATLAS collaboration for Pb-Pb collisions at the nucleon-nucleon center of mass energy of 5.02 TeV.  This software package serves as the companion code to https://arxiv.org/abs/2412.03724 and can be used to generate all results and figures found therein.
 
 ## Directory Structure
-src - all python source code
-h5  - input data files
-fig - figures created by Plotting routines
+- src - all python source code
+- h5  - input data files and trento config file to generate h5 input
+- fig - figures created by Plotting routines
+
+## Companion packages
+This analyses requires installing and building the TRENTO code from https://github.com/Duke-QCD/trento to generate the 2D initial state geometry for heavy-ion collisions.
 
 ## Analysis Source Code (src/)
 The following 5 analysis routines will generate all physics results:
