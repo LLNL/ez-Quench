@@ -50,10 +50,12 @@ print('Executing ',fiterr,'with run_emcee =',run_emcee)
 generate_figures = True
 mycol = ('darkgreen','darkorange','darkred','darkblue','darkgoldenrod','brown','olive','grey')
 mylin = ('dashed','dashdot','dotted',(0,(2,2)),(0,(3,3)),(0,(4,4)),(0,(5,5)),(0,(3,5,1,5,1,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 '''Read hdf5 inputs for ppJet parameters and ATLAS data'''
 ATLAS_datafile = h5dir + 'ATLAS_data.h5'

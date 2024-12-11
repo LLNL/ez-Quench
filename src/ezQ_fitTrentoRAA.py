@@ -48,9 +48,11 @@ if (ierr == 4):
 generate_figures = True
 mycol = ('darkred','darkgreen','darkblue','darkorange','darkgoldenrod','brown','olive')
 mylin = ((0,(5,7)),(6,(2,1,2,7)),'dotted','dashed','dashdot',(0,(2,2)),(0,(3,3)),(0,(4,4)),(0,(5,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
 figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
 h5dir   = workdir + 'h5/'
 base    = 'RAA_Pb5_ATL_del'
 

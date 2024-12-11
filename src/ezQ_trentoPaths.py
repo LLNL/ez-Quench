@@ -35,10 +35,12 @@ plt.rcParams['legend.fontsize'] = 12
 
 # Use this flag to remake figures
 mycol = ('darkblue','darkorange','darkred','darkgreen','darkgoldenrod','brown','olive')
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 # Initialize random numbers, set grid to match trento run
 rng    = np.random.default_rng(12345)

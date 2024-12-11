@@ -25,6 +25,8 @@ modified: 2023-jun-28 RAS - finish testing chi2/loglik with cov errors for jets
 # %%
 
 # Import standard packages and set plots inline
+import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import optimize
@@ -34,12 +36,12 @@ from matplotlib.gridspec import GridSpec
 generate_figures = True
 mycol = ['darkred','darkgreen','darkorange','darkblue']
 mylin = [(0,(5,7)),(6,(2,1,2,7))]
-#mycol = ('darkblue','darkorange','darkred','darkgreen','darkgoldenrod','brown','olive')
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
-texdir  = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['axes.titlesize'] = 20
@@ -179,7 +181,7 @@ ax2.plot(pTmid,ratio_nup*fnup,'b',linestyle=mylin[1],linewidth=mylw,label='ratio
 
 generate_figures = True
 if (generate_figures):
-    fig.savefig(texdir+'fig_ppJet.pdf',bbox_inches='tight')
+    fig.savefig(figdir+'fig_ppJet.pdf',bbox_inches='tight')
 
 # %%
 '''Calculate 1-sigma parameter errors with chi2 +/-1 test because res.hess_inv results were not making sense'''

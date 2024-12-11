@@ -10,6 +10,8 @@ modified: 2024-nov-04 RAS add extra fit type for gamma with alpha*k
 '''
 
 # Import standard packages and set plots inline
+import os
+import sys
 import emcee
 import numpy as np
 import h5py
@@ -19,11 +21,12 @@ import matplotlib.pyplot as plt
 saveFig = True
 mycol = ('darkblue','darkorange','darkred','darkgreen','darkgoldenrod','brown','olive','grey')
 mylin = ('dotted','dashed','dashdot',(0,(2,2)),(0,(3,3)),(0,(4,4)),(0,(5,5)),(0,(3,5,1,5,1,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
-texdir  = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['axes.titlesize'] = 20
@@ -135,6 +138,6 @@ for i in np.arange(nd):
 saveFig = True
 if (saveFig):
     figname = 'fig_corner_'+fit_name[ifit]+'_'+err_type[ierrs[0]]+'_'+err_type[ierrs[1]]
-    fig.savefig(texdir+figname+'.pdf',bbox_inches='tight')
+    fig.savefig(figdir+figname+'.pdf',bbox_inches='tight')
 
 # %%

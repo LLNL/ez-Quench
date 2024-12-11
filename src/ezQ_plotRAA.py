@@ -10,6 +10,8 @@ modified: 2024-jun-01 RAS finish and make publication-worthy plots
 '''
 
 # Import standard packages and set plots inline
+import os
+import sys
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,11 +22,12 @@ from ezQ_helper import ppw0
 generate_figures = True
 mycol = ('darkgreen','darkorange','indigo','darkred','darkgoldenrod','brown','olive','darkblue','grey')
 mylin = ('dashed','dashdot','dotted',(0,(2,2)),(0,(3,3)),(0,(4,4)),(0,(5,5)),(0,(3,5,1,5,1,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
-texdir   = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['axes.titlesize'] = 20
@@ -143,7 +146,7 @@ for i,r in enumerate(axs):
 
 generate_figures = True
 if (generate_figures):
-    fig.savefig(texdir+'fig_RAAcent_draws.pdf')
+    fig.savefig(figdir+'fig_RAAcent_draws.pdf')
 
 
 # %%

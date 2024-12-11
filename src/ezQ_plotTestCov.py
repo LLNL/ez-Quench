@@ -21,6 +21,8 @@ Each error treatment above is fit in three ways
 # %% 
 
 # Import standard packages and set plots inline
+import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import optimize
@@ -45,8 +47,11 @@ plt.rcParams['ytick.labelsize'] = 16
 
 mylin = ('solid','dashed',(0,(5,1)),'dashdot',(0,(5,1,1,1,1,1)))
 mycol = ('darkred','darkblue','darkgreen','darkgoldenrod','indigo','indigo','brown')
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-texdir  = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
 
 '''Load data from ATLAS '''
 Xedge = np.array([158,178,200,224,251,282,316,355,398,501,631])
@@ -153,7 +158,7 @@ ax.legend(loc='lower right',ncol=2,borderaxespad=2,handlelength=3)
 
 saveFig = True
 if (saveFig):
-    fig.savefig(texdir+'figB_takeLog_compare.pdf')
+    fig.savefig(figdir+'figB_takeLog_compare.pdf')
 
 # %%
 '''Plot fits to flipped data'''
@@ -176,6 +181,6 @@ ax.legend(loc='lower right',ncol=2,borderaxespad=2,handlelength=3)
 
 saveFig = True
 if (saveFig):
-    fig.savefig(texdir+'figB_flipData_compare.pdf')
+    fig.savefig(figdir+'figB_flipData_compare.pdf')
 
 # %%

@@ -9,6 +9,8 @@ modified: 2024-oct-25 RAS settle on tau=0.1,0.5,0.9 plots for paper
 # %%
 
 # Import standard packages and set plots inline
+import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import h5py
@@ -16,10 +18,11 @@ import h5py
 generate_figures = True
 mycol = ('darkred','darkgreen','darkblue','darkorange','darkgoldenrod','brown','olive')
 mylin = ((0,(5,7)),(6,(2,1,2,7)),'dotted','dashed','dashdot',(0,(2,2)),(0,(3,3)),(0,(4,4)),(0,(5,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-texdir  = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
 figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
 h5dir   = workdir + 'h5/'
 base    = 'RAA_Pb5_ATL_del'
 
@@ -150,7 +153,7 @@ for i in np.arange(nlwt):
 
 generate_figures = True
 if (generate_figures):
-    figname = texdir + 'fig_TrentoRAA_Ltau_' + errsample[:-1] + '.pdf'
+    figname = figdir + 'fig_TrentoRAA_Ltau_' + errsample[:-1] + '.pdf'
     fig.savefig(figname)
 
 # %%
@@ -213,7 +216,7 @@ ax.legend(h,l,ncol=2,loc='lower right')
 
 generate_figures = True
 if (generate_figures):
-    figname = texdir + 'fig_TrentoRAA_allexp' + '.pdf'
+    figname = figdir + 'fig_TrentoRAA_allexp' + '.pdf'
     fig.savefig(figname)
 
 # %%

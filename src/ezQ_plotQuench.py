@@ -12,8 +12,9 @@ modified: 2024-jun-04 RAS finish heatmap and dist figures
 '''
 
 # Import standard packages and set plots inline
+import os
+import sys
 import h5py
-import emcee
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import gamma
@@ -22,11 +23,12 @@ from scipy.special import gamma
 generate_figures = True
 mycol = ('darkblue','darkorange','darkred','darkgreen','darkgoldenrod','brown','olive','grey')
 mylin = ('dotted','dashed','dashdot',(0,(2,2)),(0,(3,3)),(0,(4,4)),(0,(5,5)),(0,(3,5,1,5,1,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
-texdir  = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['axes.titlesize'] = 20
@@ -105,7 +107,7 @@ ax.plot(pT,mean_gamma,color=mycol[1],linestyle=mylin[1],linewidth=mylw,label=r'g
 ax.legend(loc='lower left',framealpha=1.,borderaxespad=0.8,handlelength=3.5)
 
 if (generate_figures):
-    fig.savefig(texdir+'fig_pTquench_heatmap.pdf')
+    fig.savefig(figdir+'fig_pTquench_heatmap.pdf')
 # %%
 
 '''distribution pT quench figure with gamma distribution'''
@@ -167,6 +169,6 @@ ax.plot((0.),(10.),color=mycol[3],linestyle=mylin[1],linewidth=mylw,label=r'gamm
 ax.legend(loc='upper right',borderaxespad=1,handlelength=4.2)
 
 if (generate_figures):
-    fig.savefig(texdir+'fig_pTquench_dist.pdf')
+    fig.savefig(figdir+'fig_pTquench_dist.pdf')
 
 # %%

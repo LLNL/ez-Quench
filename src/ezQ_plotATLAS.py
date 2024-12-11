@@ -27,11 +27,12 @@ from scipy import optimize
 generate_figures = False
 mycol = ['darkblue','darkred','darkgreen','darkgoldenrod','brown','olive','purple']
 mylin = ((0,(5,3)),(0,(2,1,2,3)),'solid','dashdot','dashed','dotted',(0,(3,3)),(0,(5,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
-figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
-h5dir   = workdir + 'h5/'
-texdir  = workdir + 'ezQtex/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
+figdir  = workdir + '/fig/'
+h5dir   = workdir + '/h5/'
 
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['axes.titlesize'] = 20
@@ -126,7 +127,7 @@ for i in np.arange(cbin.size):
 
 generate_figures = True
 if(generate_figures):
-    figname = texdir + 'figA_cov_compare'
+    figname = figdir + 'figA_cov_compare'
     fig.savefig(figname+'.pdf')
 
 # %%
@@ -184,7 +185,7 @@ plt.colorbar(im,ax=ax,shrink=0.73)
 
 generate_figures = True
 if(generate_figures):
-    figname = texdir + 'figA_cov_complete'
+    figname = figdir + 'figA_cov_complete'
     fig.savefig(figname+'.pdf')
 
 # %%
@@ -209,7 +210,7 @@ plt.colorbar(im,ax=ax,shrink=0.73)
 
 generate_figures = True
 if(generate_figures):
-    figname = texdir + 'figA_cov_l20pct'
+    figname = figdir + 'figA_cov_l20pct'
     fig.savefig(figname+'.pdf')
 
 # %%
@@ -468,7 +469,7 @@ axs[1].legend(h,l,loc='upper left',title='ATLAS PbPb 50-80%',title_fontsize='lar
 
 savefig = True
 if (savefig):
-    fig.savefig(texdir+'figA_ATLAS_syserr.pdf')
+    fig.savefig(figdir+'figA_ATLAS_syserr.pdf')
 
 
 

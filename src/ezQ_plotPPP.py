@@ -17,11 +17,12 @@ import matplotlib.pyplot as plt
 generate_figures = False
 mycol = ['darkblue','darkred','darkgreen','darkgoldenrod','brown','olive','purple']
 mylin = ((0,(5,3)),(0,(2,1,2,3)),'solid','dashdot','dashed','dotted',(0,(3,3)),(0,(5,5)))
-workdir = '/Users/soltz1/proj/hip/hip_gitlab/ezQuench/'
+workdir = os.environ.get('ezQuench_workdir')
+if (workdir==None):
+    print('source setup.sh from ../ to define ezQuench_workdir')
+    sys.exit()
 figdir  = workdir + 'fig/'
-datadir = workdir + 'data/'
 h5dir   = workdir + 'h5/'
-texdir  = workdir + 'ezQtex/'
 
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['axes.titlesize'] = 20
@@ -97,7 +98,7 @@ ax.legend(loc='lower right',borderaxespad=2,fontsize='large')
 
 save_fig = True
 if(save_fig):
-    figname = texdir + 'figB_PPP_contour'
+    figname = figdir + 'figB_PPP_contour'
     fig.savefig(figname+'.pdf')
 
 
